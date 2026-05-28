@@ -1,0 +1,289 @@
+FASE 3 — CONSTRUCCIÓN DEL CORE DEL FRAMEWORK
+
+Aquí comenzará el “mini Laravel” que construiremos desde cero.
+
+Objetivo de esta fase
+
+Vamos a crear:
+
+✅ Front Controller
+✅ Sistema de Routing
+✅ Autoload automático
+✅ Clase App principal
+✅ BaseController
+✅ Flujo HTTP profesional
+
+1. FRONT CONTROLLER
+
+Archivo:
+
+/public/index.php
+
+¿Qué es el Front Controller?
+
+Es el punto central del sistema.
+
+TODAS las peticiones pasan por aquí.
+
+Ejemplo:
+
+Usuario
+↓
+index.php
+↓
+Router
+↓
+Controlador
+↓
+Vista
+
+¿Por qué existe?
+
+Porque centraliza:
+
+navegación,
+seguridad,
+carga del sistema,
+rutas,
+middlewares.
+
+Los frameworks modernos usan este patrón.
+
+ARCHIVO: public/index.php
+
+<?php
+
+// Mostrar errores en desarrollo
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Iniciar sesión
+
+session_start();
+
+// Definir ruta raíz
+
+define('BASE_PATH', dirname(__DIR__));
+
+// Cargar autoload
+
+require_once BASE_PATH . '/app/core/Autoload.php';
+
+// Inicializar autoload
+
+new Autoload();
+
+// Ejecutar aplicación
+
+$app = new App();
+
+EXPLICACIÓN PROFESIONAL
+
+ini_set() y error_reporting()
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+¿Qué hacen?
+
+Muestran errores durante desarrollo.
+
+¿Por qué es importante?
+
+Cuando programamos necesitamos:
+
+detectar errores,
+depurar,
+entender fallos.
+
+⚠️ En producción esto se desactiva por seguridad.
+
+session_start()
+
+session_start();
+
+¿Qué hace?
+
+Inicia el sistema de sesiones PHP.
+
+Gracias a esto podremos:
+
+mantener usuarios logueados,
+guardar datos temporales,
+manejar autenticación.
+
+BASE_PATH
+
+define('BASE_PATH', dirname(__DIR__));
+
+¿Qué hace?
+
+Define la raíz del proyecto.
+
+Ejemplo:
+
+C:/xampp/htdocs/taskflow
+
+¿Por qué se usa?
+
+Evita escribir rutas manuales enormes.
+
+Autoload
+
+require_once BASE_PATH . '/app/core/Autoload.php';
+
+¿Qué es?
+
+Sistema de carga automática de clases.
+
+¿Qué problema resuelve?
+
+Sin autoload tendrías que hacer:
+
+require_once 'controllers/HomeController.php';
+require_once 'models/User.php';
+require_once 'core/Router.php';
+
+TODO el tiempo.
+
+Eso destruye mantenimiento.
+
+2. AUTOLOAD
+
+Archivo:
+/app/core/Autoload.php
+
+Código
+
+<?php
+
+class Autoload
+{
+    public function __construct()
+    {
+        spl_autoload_register([$this, 'loadClass']);
+    }
+
+    private function loadClass($class)
+    {
+        $paths = [
+            BASE_PATH . '/app/controllers/',
+            BASE_PATH . '/app/models/',
+            BASE_PATH . '/app/core/',
+        ];
+
+        foreach ($paths as $path) {
+
+            $file = $path . $class . '.php';
+
+            if (file_exists($file)) {
+                require_once $file;
+                return;
+            }
+        }
+    }
+}
+EXPLICACIÓN PROFESIONAL
+
+spl_autoload_register()
+
+¿Qué hace?
+
+Le dice a PHP:
+
+"Cuando una clase sea utilizada,
+
+búscala automáticamente."
+
+Ejemplo
+
+Cuando escribamos:
+
+new Router();
+
+PHP automáticamente buscará:
+
+/app/core/Router.php
+
+¿Qué ventaja tiene?
+
+✅ Organización
+✅ Escalabilidad
+✅ Menos require_once
+✅ Código limpio
+✅ Arquitectura profesional
+
+3. CLASE APP
+
+Archivo:
+
+/app/core/App.php
+
+¿Qué será App?
+
+Será el núcleo principal del sistema.
+
+Responsabilidades
+
+La clase App:
+
+cargará rutas,
+inicializará el router,
+procesará peticiones,
+ejecutará controladores.
+
+Código inicial
+
+<?php
+
+class App
+{
+    public function __construct()
+    {
+        echo "TaskFlow iniciado correctamente 🚀";
+    }
+}
+
+¿Por qué empezamos simple?
+
+Porque estamos construyendo:
+
+paso a paso,
+
+entendiendo cada pieza,
+como arquitectos reales.
+
+¿Qué debes hacer AHORA?
+
+Crear estas carpetas:
+
+/taskflow
+/app
+/core
+/controllers
+/models
+/views
+/config
+/helpers
+/middleware
+/public
+/assets
+/routes
+/storage
+
+Luego crear estos archivos:
+
+/public/index.php
+/app/core/Autoload.php
+/app/core/App.php
+
+RESULTADO ESPERADO
+
+Cuando abras:
+
+http://localhost/taskflow/public
+
+Debes ver:
+
+TaskFlow iniciado correctamente 🚀
