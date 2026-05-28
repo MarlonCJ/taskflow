@@ -1,0 +1,242 @@
+FASE 2 — DISEÑO DE ARQUITECTURA BASE
+
+En esta fase construiremos el núcleo del proyecto.
+
+NO vamos a crear funcionalidades todavía.
+
+Primero construiremos la infraestructura profesional del sistema, exactamente como lo hacen los frameworks reales.
+
+¿Qué construiremos primero?
+
+Vamos a crear:
+
+1. Estructura MVC
+
+La organización profesional del proyecto.
+
+2. Front Controller
+
+El archivo public/index.php.
+
+Será el punto central de entrada del sistema.
+
+3. Router
+
+El sistema que interpreta URLs.
+
+Ejemplo:
+
+/login
+/tasks
+/tasks/create
+
+4. Núcleo del sistema
+
+Crearemos:
+
+Router
+Controller base
+Model base
+Configuración
+Autoload
+
+¿Por qué empezamos por aquí?
+
+Porque los sistemas profesionales NO empiezan haciendo pantallas.
+
+Primero se construye:
+
+la arquitectura,
+el flujo,
+la organización,
+la base escalable.
+
+Eso evita caos en proyectos grandes.
+
+ESTRUCTURA PROFESIONAL DEL PROYECTO
+
+Carpeta principal
+
+/taskflow
+
+Dentro construiremos:
+
+/taskflow
+│
+├── /app
+│   ├── /controllers
+│   ├── /models
+│   ├── /views
+│   ├── /core
+│   ├── /config
+│   ├── /helpers
+│   └── /middleware
+│
+├── /public
+│   ├── /assets
+│   │   ├── /css
+│   │   ├── /js
+│   │   └── /images
+│   │
+│   └── index.php
+│
+├── /routes
+├── /storage
+│
+└── .htaccess
+
+EXPLICACIÓN PROFESIONAL DE CADA CARPETA
+
+/app
+
+Es el corazón de la aplicación.
+
+Aquí vive toda la lógica del sistema.
+
+/controllers
+
+Responsabilidad:
+
+Controlar el flujo de peticiones.
+
+Ejemplo:
+
+recibir formularios,
+llamar modelos,
+enviar vistas.
+
+El controlador actúa como intermediario entre usuario y sistema.
+
+/models
+
+Responsabilidad:
+
+Manejar la base de datos.
+
+Aquí vivirán:
+
+consultas SQL,
+CRUD,
+relaciones.
+
+Los modelos representan los datos del sistema.
+
+/views
+
+Responsabilidad:
+
+Mostrar HTML al usuario.
+
+Aquí SOLO debe existir presentación visual.
+
+Nunca SQL.
+Nunca lógica compleja.
+
+/core
+
+Aquí construiremos el mini framework interno.
+
+Contendrá:
+
+Router,
+BaseController,
+BaseModel,
+App,
+Autoload.
+
+Es el motor interno del sistema.
+
+/config
+
+Guardará:
+
+conexión DB,
+constantes,
+variables globales,
+entorno.
+
+Centralizar configuración mejora mantenimiento.
+
+/middleware
+
+Responsabilidad:
+Seguridad y control de acceso.
+
+Ejemplo:
+
+verificar login,
+proteger rutas privadas,
+validar permisos.
+
+/public
+
+IMPORTANTE ⚠️
+
+Será la ÚNICA carpeta pública.
+
+Todo lo demás estará protegido.
+
+Aquí vivirán:
+
+CSS,
+JS,
+imágenes,
+index.php.
+
+Esto mejora muchísimo la seguridad.
+
+¿Qué es index.php?
+
+Es el:
+
+Front Controller
+
+Todas las peticiones pasarán por aquí.
+
+Ejemplo:
+
+Usuario → index.php → Router → Controlador
+
+Esto permite:
+
+centralizar navegación,
+mejorar seguridad,
+controlar todo el flujo HTTP.
+
+/routes
+
+Aquí definiremos las URLs del sistema.
+
+Ejemplo:
+
+$router->get('/login', 'AuthController@login');
+
+/storage
+
+Guardará:
+
+logs,
+cache,
+archivos temporales.
+
+.htaccess
+
+Permitirá:
+
+URLs amigables,
+redirección al Front Controller,
+ocultar index.php.
+
+Ejemplo:
+
+/tasks
+
+En lugar de:
+
+/index.php?route=tasks
+
+Eso mejora:
+
+SEO,
+limpieza,
+experiencia de usuario.
