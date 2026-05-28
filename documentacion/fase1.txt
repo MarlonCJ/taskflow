@@ -1,0 +1,201 @@
+Proyecto 1: TaskFlow
+
+Sistema Profesional de Gestión de Tareas en PHP MVC
+
+FASE 1 — ANÁLISIS DEL SISTEMA
+
+Antes de escribir código, primero debemos pensar como arquitectos de software.
+Esto es exactamente cómo trabajan los proyectos profesionales.
+
+1. ¿Qué problema resolverá el sistema?
+
+El sistema permitirá que usuarios puedan:
+
+crear tareas,
+administrarlas,
+marcarlas como completadas,
+editarlas,
+eliminarlas,
+iniciar sesión,
+gestionar sus propias tareas.
+
+2. Objetivo del proyecto
+
+El objetivo NO es solamente crear una To-Do List.
+
+El verdadero objetivo es aprender:
+
+arquitectura MVC,
+flujo HTTP,
+routing,
+controladores,
+modelos,
+PDO,
+autenticación,
+sesiones,
+seguridad,
+CRUD profesional.
+
+3. Arquitectura que utilizaremos
+
+Usaremos:
+
+✅ Arquitectura MVC
+
+MVC significa:
+
+Componente	    Responsabilidad
+Model	        Manejar datos
+View	        Mostrar interfaz
+Controller	    Controlar flujo
+
+Esto permite mantener el proyecto:
+
+organizado,
+escalable,
+mantenible.
+
+4. Flujo interno del sistema
+
+Tu aplicación funcionará así:
+
+Navegador
+↓
+index.php (Front Controller)
+↓
+Router
+↓
+Controlador
+↓
+Modelo
+↓
+Base de datos
+↓
+Vista
+↓
+HTML al usuario
+
+Este flujo es la base de frameworks modernos.
+
+5. Módulos principales del sistema
+
+Módulo Auth
+
+Responsable de:
+
+login,
+registro,
+logout,
+sesiones.
+
+-----------
+
+Módulo Tasks
+
+Responsable de:
+
+crear tareas,
+editar,
+eliminar,
+listar,
+completar tareas.
+
+------------
+
+Módulo Dashboard
+
+Responsable de:
+
+panel principal,
+estadísticas básicas,
+navegación.
+
+6. Usuarios del sistema
+
+Inicialmente tendremos:
+
+Rol	    Permisos
+user	Administrar sus tareas
+
+Más adelante podremos escalar a:
+
+admin,
+moderador,
+múltiples roles.
+
+7. Base de datos inicial
+
+Tendremos inicialmente 2 tablas:
+
+users
+
+Guardará:
+
+usuarios,
+emails,
+passwords.
+
+--------
+
+tasks
+
+Guardará:
+
+tareas,
+estado,
+usuario propietario,
+fechas.
+
+8. Seguridad que implementaremos
+
+Desde el inicio aprenderás seguridad profesional:
+
+✅ PDO
+✅ Prepared Statements
+✅ Protección SQL Injection
+✅ Validación de formularios
+✅ Sanitización
+✅ Sesiones seguras
+✅ Protección XSS
+✅ CSRF más adelante
+
+La seguridad es obligatoria en proyectos reales.
+
+9. Estructura profesional del proyecto
+
+Nuestra estructura será:
+
+/taskflow
+│
+├── /app
+│   ├── /controllers
+│   ├── /models
+│   ├── /views
+│   ├── /core
+│   ├── /config
+│   ├── /helpers
+│   └── /middleware
+│
+├── /public
+│   ├── /assets
+│   └── index.php
+│
+├── /routes
+├── /storage
+└── .htaccess
+
+Esta estructura está preparada para crecer profesionalmente.
+
+10. Qué aprenderás realmente en este proyecto
+
+Al finalizar este sistema ya entenderás:
+
+✅ Arquitectura MVC
+✅ Cómo funciona Laravel internamente
+✅ Cómo funciona el Router
+✅ Cómo funcionan las sesiones
+✅ CRUD profesional
+✅ Bases de datos reales
+✅ Seguridad backend
+✅ Organización profesional
+✅ Escalabilidad básica
